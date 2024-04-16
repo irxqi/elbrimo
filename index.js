@@ -1,5 +1,5 @@
 const { Client } = require("discord.js-selfbot-v13");
-
+const keep_alive = requrie('./keep_alive.js')
 const client = new Client({
   checkUpdate: false,
   ws: { properties: { $browser: "Discord iOS" } },
