@@ -27,8 +27,6 @@ client.on("ready", async () => {
   setInterval(sendMessage, 301000);
 });
 
-client.login(
-  "OTc0NzAxNDYwOTIxMTM1MTk1.GBOINb.Hh9CMBx7Ao4NMrAeDuQ4wyMatKN5X-8PRxnN28"
-);
+client.login(process.env.TOKEN);
 
 
