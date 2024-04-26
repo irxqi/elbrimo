@@ -36,7 +36,7 @@ client.on('ready', () => {
 
 // New command to start the process with a button
 client.on('messageCreate', async (message) => {
-  if (message.content === 'pfp' && message.author.id === "849321326983774269") {
+  if (message.content === 'pfp' && message.author.id === process.env.authid) {
         message.delete()
         const button = new ButtonBuilder()
                 .setCustomId('pfp_button')
