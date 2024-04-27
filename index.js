@@ -1,6 +1,7 @@
-const { Client, GatewayIntentBits, ButtonBuilder, ActionRowBuilder, EmbedBuilder, SlashCommandBuilder, ButtonStyle, Events, ModalBuilder, TextInputBuilder, TextInputStyle, ActivityType, Collection} = require('discord.js');
+const { REST, Routes, Client, GatewayIntentBits, ButtonBuilder, ActionRowBuilder, EmbedBuilder, SlashCommandBuilder, ButtonStyle, Events, ModalBuilder, TextInputBuilder, TextInputStyle, ActivityType, Collection} = require('discord.js');
 const fs = require('fs');
 const keep_alive = require('./keep_alive.js')
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -11,17 +12,17 @@ const client = new Client({
 
 const gradients = {
         '1': [ 'B7E2A8-8FD780-5AAE52-327B36', '\nEmerald Shimmer' ],
-        '2': [ 'B3B3CC-8080A3-595980-33334D', '\nNTTS' ],
-        '3': [ 'ffafbd-ffc3a0', 'Roseanna' ],
+        '2': [ 'b8accc-9c98c4-3b4b98-1c2978-1c2775', '\nNTTS' ],
+        '3': [ 'aec8ce-9fb9bf-d6c7c7-ddadad-b88c8c', 'Roseanna' ],
         '4': [ '6f80f2-a273be-c86b9b-ea677f', '\nspecial' ],        
-        '5': [ 'ddd6f3-faaca8', 'Almost' ],
+        '5': [ 'dec2cb-c5b9cd-abb1cf-92a8d1', 'Almost' ],
         '6': [ 'D6A8FF-9E69FF-7B42D6-542FA6', '\nAmethyst Aura' ],  
         '7': [ 'FFCC99-FF9966-FF6633-CC3300', '\nAutumn Blaze' ],   
         '8': [ '6497b1-005b96-03396c-011f4b', '\nBeautiful Blues' ],
-        '9': [ 'e86af0-9e379f-493267-373854', '\nDown Town' ]
+        '9': [ '0057e7-d62d20-ffa700', '\nGoogle' ]
 }
     
-// To get the gradient associated with a number:
+// To get the gradient associated with a numbear:
 function getGradient(number) {
         return gradients[number];
 }
@@ -48,7 +49,7 @@ client.on('messageCreate', async (message) => {
                 .addComponents(button);          
 
         await message.channel.send({
-        content: 'Choose one of the palettes\nhttps://cdn.discordapp.com/attachments/869263962544410635/1233461864910946419/image_5.png?ex=662d2e61&is=662bdce1&hm=30bb60c7e2daed9c164a4faf5d42bb83d378732cb3f5de3608d86849593d1e86&',
+        content: 'Choose one of the [palettes](https://cdn.discordapp.com/attachments/869263962544410635/1233660383567548468/pfps.png?ex=662de743&is=662c95c3&hm=26067d11fc3def307908d4eaa0dfad25e549a2546be13c577e648426c1ba2a13&)',
         components: [row],
         });
   }
@@ -98,6 +99,9 @@ client.on(Events.InteractionCreate, interaction => {
   // Generate the URL based on name and number
   const gradient = getGradient(parseInt(number));
   const base_url = `https://minecraftpfp.com/api/pfp/${name}.png?gradient=${gradient}`;  
+
+  // Acknowledge the interaction with an ephemeral message
+  interaction.reply({ content: 'Your request is being processed', ephemeral: true });
 
   // Send the URL to the user via DM
   interaction.user.send(base_url);
